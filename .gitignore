@@ -8,3 +8,5 @@
 !.gitignore
 !*.yml
 !Gemfile
+fp06/*.eps
+fp06/*.png
