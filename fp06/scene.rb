@@ -109,7 +109,7 @@ class Scene
     #                       Lambertian.new(Colors::RED)))
 
     miku = Stl.new('miku.stl')
-    miku.parse(Vector[0.0, 0.5, -1.0], 1.0)
+    miku.parse(Vector[0.0, -0.5, -0.8], 1.0)
 
     miku.triangles.each do |triangle|
       @world.add(p(triangle))
