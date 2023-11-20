@@ -4,9 +4,9 @@
 # マテリアルの基底クラス
 #
 class Material
-  def num_sample(_depth, _max_depth)
-    # [depth - max_depth + 3, 1].max
-    1
+  def num_sample(depth, max_depth)
+    [depth - max_depth + 3, 1].max
+    # 1
   end
 
   #

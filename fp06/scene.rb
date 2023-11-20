@@ -84,7 +84,7 @@ class Scene
   def build
     # @world.add(Sphere.new(Vector[0.0, 0.0, -1.0], 0.25, Lambertian.new(Colors::PINK)))
     # @world.add(Sphere.new(Vector[0.0, 0.0, -1.0], 0.1))
-    # @world.add(Sphere.new(Vector[0, -100.5, -1.0], 100.25, Lambertian.new(Colors::LIME)))
+    @world.add(Sphere.new(Vector[0, -100.5, -1.0], 100.2, Lambertian.new(Colors::LIME)))
     # @world.add(Sphere.new(Vector[-0.1, 0.2, -1.0], 0.05))
     # @world.add(Triangle.new(
     #              Vector[0.6, 0.0, -0.8],
@@ -134,7 +134,7 @@ class Scene
       280 => Colors::MIKU
     }
 
-    miku.parse(Vector[0.0, -0.5, -0.8], 1.0) do |i|
+    miku.parse(Vector[0.0, -0.3, -0.8], 1.0) do |i|
       Lambertian.new(color[color.keys.reverse.bsearch { |k| k <= i }] || Colors::GRAY)
     end
 
