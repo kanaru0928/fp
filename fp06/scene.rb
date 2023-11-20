@@ -166,8 +166,8 @@ class Scene
   def render
     start = Time.new
 
-    # @image.render_parallel(self)
-    @image.render_with(&method(:func))
+    @image.render_parallel(self)
+    # @image.render_with(&method(:func))
 
     puts "rendering takes #{Time.new - start} s."
   end
