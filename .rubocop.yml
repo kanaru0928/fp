@@ -12,3 +12,6 @@ Naming/MethodParameterName:
 
 Metrics/CyclomaticComplexity:
   Enabled: false
+  
+Metrics/PerceivedComplexity:
+  Enabled: false

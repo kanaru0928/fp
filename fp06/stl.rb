@@ -26,13 +26,13 @@ class Stl
     @length.times do |i|
       data = @buffer.unpack('f12', offset: @pointer)
 
-      normal = Vector[data[0], data[1], data[2]]
-      p0 = (Vector[data[3], data[5], data[4]] * scale) + offset
-      p1 = (Vector[data[6], data[8], data[7]] * scale) + offset
-      p2 = (Vector[data[9], data[11], data[10]] * scale) + offset
+      normal = Vector[data[0], data[2], data[1]]
+      p0 = p(p(Vector[data[3], -data[5], data[4]]) * scale) + offset
+      p1 = (Vector[data[6], -data[8], data[7]] * scale) + offset
+      p2 = (Vector[data[9], -data[11], data[10]] * scale) + offset
 
-      @triangles[i] = Triangle.new(p0, p1, p2, Lambertian.new(Colors::GRAY), normal)
-      @pointer += 12 << 2
+      @triangles[i] = Triangle.new(p0, p1, p2, Lambertian.new(Colors::GRAY), -normal)
+      @pointer += (12 << 2) + 2
     end
   end
 end

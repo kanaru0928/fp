@@ -65,4 +65,5 @@ class Colors
   PINK = Color.normalized(0xff, 0x5f, 0x5f).freeze
   ORANGE = Color.normalized(0xff, 0xaf, 0x5f).freeze
   GRAY = Color.normalized(0x7f, 0x7f, 0x7f).freeze
+  RED = Color.normalized(0xff, 0x00, 0x00).freeze
 end

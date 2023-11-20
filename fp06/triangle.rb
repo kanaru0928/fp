@@ -30,23 +30,46 @@ class Triangle < Shape
     @e1.cross(@e2)
   end
 
-  def hit(ray, t0, t1)
-    det = ray.direction.dot(@normal)
+  def hit(ray, _t0, _t1)
+    alpha = ray.direction.cross(@e2)
 
-    return if det < -1e-6
+    det = @e1.dot(alpha)
 
-    vo = @p0 - ray.origin
+    return if det.abs < 1e-6
 
-    t = vo.dot(@normal) / det
+    invdet = 1.0 / det
+    r = ray.origin - @p0
 
-    m = vo.cross(ray.direction)
+    u = alpha.dot(r) * invdet
+    return if u.negative? || u > 1.0
 
-    u = m.dot(@e2) / det
-    v = -m.dot(@e1) / det
+    beta = r.cross(@e1)
+    v = ray.direction.dot(beta) * invdet
+    return if v.negative? || u + v > 1.0
 
-    return unless t0 < t && t < t1 && u.positive? && v.positive? && u + v < 1
+    t = @e2.dot(beta) * invdet
+    return if t.negative?
 
     position = ray.at(t)
-    HitRecord.new(t, position, @normal.normalize, @material)
+    HitRecord.new(t, position, @normal, @material)
   end
+  # def hit(ray, t0, t1)
+  #   det = ray.direction.dot(@normal) * calc_normal.r
+
+  #   return if det < 1e-6
+
+  #   vo = @p0 - ray.origin
+
+  #   t = vo.dot(@normal) / det * calc_normal.r
+
+  #   m = vo.cross(ray.direction)
+
+  #   u = m.dot(@e2) / det
+  #   v = -m.dot(@e1) / det
+
+  #   return unless t0 < t && t < t1 && u.positive? && v.positive? && u + v < 1
+
+  #   position = ray.at(t)
+  #   HitRecord.new(t, position, @normal.normalize, @material)
+  # end
 end

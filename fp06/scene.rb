@@ -84,25 +84,41 @@ class Scene
   def build
     # @world.add(Sphere.new(Vector[0.0, 0.0, -1.0], 0.25, Lambertian.new(Colors::PINK)))
     # @world.add(Sphere.new(Vector[0.0, 0.0, -1.0], 0.1))
-    @world.add(Sphere.new(Vector[0, -100.5, -1.0], 100.25, Lambertian.new(Colors::LIME)))
+    # @world.add(Sphere.new(Vector[0, -100.5, -1.0], 100.25, Lambertian.new(Colors::LIME)))
     # @world.add(Sphere.new(Vector[-0.1, 0.2, -1.0], 0.05))
     # @world.add(Triangle.new(
-    #              Vector[0.6, 0.0, -1.0],
-    #              Vector[0.3, -0.05, -1.0],
-    #              Vector[0.5, 0.2, -1.1],
+    #              Vector[0.6, 0.0, -0.8],
+    #              Vector[0.0, 0.3, -1.0],
+    #              Vector[0.3, 0.5, -1.1],
     #              Lambertian.new(Colors::ORANGE)
     #            ))
 
+    # @world.add(Triangle.new(
+    #              Vector[-0.2137734293937683, -0.30711328983306885, -0.6027056276798248],
+    #              Vector[0.4791070222854614, 0.084536612033844, -0.6027056276798248],
+    #              Vector[0.23703497648239136, 0.5127939879894257, -1.2283810079097748],
+    #              Lambertian.new(Colors::ORANGE),
+    #              Vector[0.3868289589881897, 0.6843516230583191, -0.6180827617645264]
+    #            ))
+
+    # @world.add(Sphere.new(Vector[-0.2137734293937683, -0.30711328983306885, -0.6027056276798248], 0.05,
+    #                       Lambertian.new(Colors::RED)))
+    # @world.add(Sphere.new(Vector[0.4791070222854614, 0.084536612033844, -0.6027056276798248], 0.05,
+    #                       Lambertian.new(Colors::RED)))
+    # @world.add(Sphere.new(Vector[0.23703497648239136, 0.5127939879894257, -1.2283810079097748], 0.05,
+    #                       Lambertian.new(Colors::RED)))
+
     miku = Stl.new('miku.stl')
-    miku.parse(Vector[0.0, 0.0, -1.0], 1.0 / 50.0)
+    miku.parse(Vector[0.0, 0.5, -1.0], 1.0)
 
     miku.triangles.each do |triangle|
-      @world.add(triangle)
+      @world.add(p(triangle))
     end
 
     @post_effect.add(GammaCorrection.new)
 
     puts 'build done'
+    $stdout.flush
   end
 
   def func(x, y)
