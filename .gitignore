@@ -1,0 +1,10 @@
+*
+!.devcontainer
+!.devcontainer/**
+!.vscode
+!.vscode/**
+!fp06
+!fp06/**
+!.gitignore
+!*.yml
+!Gemfile

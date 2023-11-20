@@ -1,0 +1,14 @@
+AllCops:
+  NewCops: enable
+
+Metrics/AbcSize:
+  Enabled: false
+  
+Metrics/MethodLength:
+  Enabled: false
+
+Naming/MethodParameterName:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
