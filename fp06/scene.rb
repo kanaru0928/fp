@@ -109,7 +109,34 @@ class Scene
     #                       Lambertian.new(Colors::RED)))
 
     miku = Stl.new('miku.stl')
-    miku.parse(Vector[0.0, -0.5, -0.8], 1.0)
+    color = {
+      0 => Colors::SKIN,
+      35 => Colors::MIKU,
+      96 => Colors::CLOTH,
+      138 => Colors::SKIN,
+      140 => Colors::CLOTH_DARK,
+      142 => Colors::SKIN,
+      146 => Colors::CLOTH_DARK,
+      150 => Colors::SKIN,
+      154 => Colors::CLOTH_DARK,
+      156 => Colors::SKIN,
+      161 => Colors::CLOTH_DARK,
+      163 => Colors::SKIN,
+      167 => Colors::CLOTH_DARK,
+      171 => Colors::SKIN,
+      175 => Colors::CLOTH_DARK,
+      177 => Colors::SKIN,
+      180 => Colors::MIKU,
+      216 => Colors::BLACK,
+      220 => Colors::CLOTH_DARK,
+      236 => Colors::CLOTH_DARK,
+      272 => Colors::SKIN,
+      280 => Colors::MIKU
+    }
+
+    miku.parse(Vector[0.0, -0.5, -0.8], 1.0) do |i|
+      Lambertian.new(color[color.keys.reverse.bsearch { |k| k <= i }] || Colors::GRAY)
+    end
 
     miku.triangles.each do |triangle|
       @world.add(p(triangle))

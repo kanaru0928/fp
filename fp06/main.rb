@@ -3,8 +3,8 @@
 require_relative 'scene'
 
 module Settings
-  WIDTH = 60.0
-  HEIGHT = 45.0
+  WIDTH = 160.0
+  HEIGHT = 90.0
   VFOV = 60.0
   NUM_SAMPLE = 4
 end

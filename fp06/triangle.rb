@@ -26,11 +26,16 @@ class Triangle < Shape
     @normal = normal || calc_normal
   end
 
+  #
+  # 法線を計算
+  #
+  # @return [Vector] 法線
+  #
   def calc_normal
     @e1.cross(@e2)
   end
 
-  def hit(ray, _t0, _t1)
+  def hit(ray, t0, t1)
     alpha = ray.direction.cross(@e2)
 
     det = @e1.dot(alpha)
@@ -48,28 +53,9 @@ class Triangle < Shape
     return if v.negative? || u + v > 1.0
 
     t = @e2.dot(beta) * invdet
-    return if t.negative?
+    return if t0 > t || t > t1
 
     position = ray.at(t)
     HitRecord.new(t, position, @normal, @material)
   end
-  # def hit(ray, t0, t1)
-  #   det = ray.direction.dot(@normal) * calc_normal.r
-
-  #   return if det < 1e-6
-
-  #   vo = @p0 - ray.origin
-
-  #   t = vo.dot(@normal) / det * calc_normal.r
-
-  #   m = vo.cross(ray.direction)
-
-  #   u = m.dot(@e2) / det
-  #   v = -m.dot(@e1) / det
-
-  #   return unless t0 < t && t < t1 && u.positive? && v.positive? && u + v < 1
-
-  #   position = ray.at(t)
-  #   HitRecord.new(t, position, @normal.normalize, @material)
-  # end
 end

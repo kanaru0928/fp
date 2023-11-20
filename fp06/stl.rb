@@ -11,6 +11,11 @@ require_relative 'color'
 class Stl
   attr_accessor :name, :length, :triangles
 
+  #
+  # コンストラクタ
+  #
+  # @param [String] file_name ファイル名
+  #
   def initialize(file_name)
     @file_name = file_name
     @file = File.open(file_name)
@@ -22,16 +27,23 @@ class Stl
     @triangles = Array.new(@length)
   end
 
-  def parse(offset, scale)
+  #
+  # ファイルからShapeを生成
+  #
+  # @param [Vector] offset モデルの中心位置
+  # @param [Float] scale モデルの倍率
+  # @param [Method] &material 材質を返す関数
+  #
+  def parse(offset, scale, &material)
     @length.times do |i|
       data = @buffer.unpack('f12', offset: @pointer)
 
-      normal = Vector[data[0], data[2], data[1]]
-      p0 = p(p(Vector[data[3], data[5], data[4]]) * scale) + offset
-      p1 = (Vector[data[6], data[8], data[7]] * scale) + offset
-      p2 = (Vector[data[9], data[11], data[10]] * scale) + offset
+      normal = Vector[data[0], data[2], -data[1]]
+      p0 = p(p(Vector[data[3], data[5], -data[4]]) * scale) + offset
+      p1 = (Vector[data[6], data[8], -data[7]] * scale) + offset
+      p2 = (Vector[data[9], data[11], -data[10]] * scale) + offset
 
-      @triangles[i] = Triangle.new(p0, p1, p2, Lambertian.new(Colors::LIME), -normal)
+      @triangles[i] = Triangle.new(p0, p1, p2, material.call(i), normal)
       @pointer += (12 << 2) + 2
     end
   end
