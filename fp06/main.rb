@@ -13,7 +13,7 @@ def main
   scene = Scene.new(Settings::WIDTH, Settings::HEIGHT, Settings::VFOV, Settings::NUM_SAMPLE)
   scene.build
   scene.render
-  scene.write('img.ppm')
+  scene.write('img2.ppm')
 end
 
 main
